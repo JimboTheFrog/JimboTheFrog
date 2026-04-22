@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "allowJs": true,
+    "checkJs": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "moduleResolution": "Bundler",
+    "declaration": true,
+    "composite": true,
+    "baseUrl": "./",
+    "paths": {
+      "*": [
+        "/*"
+      ]
+    },
+    "outDir": "./dist",
+  },
+  "include": [ "./*.ts", "./**/*.ts", "./**/*.js", "./**/*.mjs", "./**/package.json", "build.ts", "preview.ts" ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}

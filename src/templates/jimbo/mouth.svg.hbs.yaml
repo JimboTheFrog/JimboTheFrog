@@ -1,0 +1,62 @@
+# Very wide frog smile — nearly the full width of the face (~440px)
+Frog Smile:
+  path:
+    path: 'M 0,0 Q 220,70 440,0'
+    fill: none
+    stroke: {
+      color: '{{lips1}}',
+      width: 11,
+      linecap: round
+    }
+    width: 440
+    height: 70
+    x: 83
+    y: 337
+
+# ─── Tongue flick ─────────────────────────────────────────────────────────────
+# Three flicks per 97-second cycle at irregular intervals (~6s, ~28s, ~71s)
+# so timing feels genuinely unpredictable. Delay of 11s shifts the first flick
+# away from page load.
+
+Tongue Style:
+  style: |
+    .tongue {
+      transform-origin: 303px 407px;
+      transform: scaleY(0);
+      opacity: 0;
+      animation: tongue-flick 97s 11s infinite linear both;
+    }
+    @keyframes tongue-flick {
+      0%,    5.6%  { transform: scaleY(0);    opacity: 0; }
+      6.3%          { transform: scaleY(1.3);  opacity: 1; }
+      7.7%          { transform: scaleY(1.3);  opacity: 1; }
+      8.4%          { transform: scaleY(0);    opacity: 0; }
+      28.5%         { transform: scaleY(0);    opacity: 0; }
+      29.4%         { transform: scaleY(1.3);  opacity: 1; }
+      30.8%         { transform: scaleY(1.3);  opacity: 1; }
+      31.5%         { transform: scaleY(0);    opacity: 0; }
+      72.3%         { transform: scaleY(0);    opacity: 0; }
+      73.2%         { transform: scaleY(1.3);  opacity: 1; }
+      74.4%         { transform: scaleY(1.3);  opacity: 1; }
+      75.2%         { transform: scaleY(0);    opacity: 0; }
+      100%          { transform: scaleY(0);    opacity: 0; }
+    }
+    @media (prefers-reduced-motion) {
+      .tongue { animation: none !important; transform: scaleY(0); opacity: 0; }
+    }
+
+Tongue Body:
+  ellipse:
+    ellipse: [ 40, 115 ]
+    fill: '#FF6080'
+    x: 283
+    y: 407
+    addClass: tongue
+
+Tongue Tip:
+  circle:
+    circle: 28
+    fill: '#FF3D6A'
+    x: 289
+    y: 508
+    addClass: tongue

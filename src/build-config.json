@@ -1,0 +1,104 @@
+[
+  {
+    "in": "jimbo.svg.hbs.yaml",
+    "out": "jimbo-light.svg",
+    "type": "SVG",
+    "data": {
+      "files": {
+        "bliss": "swamp.webp",
+        "solo": "solo.webp"
+      },
+      "width": 1600,
+      "height": 800,
+      "skin1": "#4CAF50",
+      "skin2": "#A5D6A7",
+      "skin3": "#2E7D32",
+      "hair1": "#1B5E20",
+      "hair2": "#388E3C",
+      "shirt": "#4CAF50",
+      "collar": "#2E7D32",
+      "lips1": "#FF7043",
+      "lips2": "#FFAB91",
+      "eye": "#FFFDE7",
+      "tearDuct": "rgba(34, 139, 34, 0.3)",
+      "iris1": "#FFF9C4",
+      "iris2": "#F9A825",
+      "iris3": "#E65100",
+      "iris4": "#FFF9C4",
+      "pupil": "#1A1A1A",
+      "speechBubbleLight": "rgba(255,255,255, 0.85)",
+      "speechBubbleStrokeLight": "white",
+      "speechBubbleDark": "rgba(34, 39, 46, 0.85)",
+      "speechBubbleStrokeDark": "black",
+      "text": "#9f00c5",
+      "accessibleTitle": "Hello World",
+      "accessibleDesc": "Animated cartoon image of Jimbo The Frog waving hello."
+    }
+  },
+  {
+    "in": "jimbo-light.svg",
+    "out": "jimbo-dark.svg",
+    "type": "DarkSVGVarient"
+  },
+  {
+    "in": "jimbo-light.svg",
+    "out": "jimbo-light-no-anim.svg",
+    "type": "AnimationDisabledSVG"
+  },
+  {
+    "in": "jimbo-light.svg",
+    "out": "jimbo-dark-no-anim.svg",
+    "type": "DarkAnimationDisabledSVG"
+  },
+  {
+    "in": "stats.svg.hbs.yaml",
+    "out": "stats-light.svg",
+    "type": "SVG",
+    "data": {
+      "width": 1600,
+      "height": 160,
+      "accessibleTitle": "Profile Info and Stats",
+      "accessibleDesc": "Information and Statistics for Jimbo The Frog's Github profile",
+      "font": "\"JetBrains Mono\", monospace",
+      "fontSize": "32px",
+      "lineWidth": 1590,
+      "files": {
+        "jetbrains": "jetbrains_mono.woff2"
+      },
+      "github": {
+        "username": "JimboTheFrog"
+      },
+      "keys": {
+        "repos": "Repos Owned",
+        "contributed": "Repos Contributed",
+        "commits": "Commits",
+        "stars": "Stars",
+        "followers": "Followers",
+        "linesOfCode": "Lines of Code"
+      }
+    }
+  },
+  {
+    "in": "stats-light.svg",
+    "out": "stats-dark.svg",
+    "type": "DarkSVGVarient"
+  },
+  {
+    "in": "readme.md.hbs",
+    "out": "ReadMe.md",
+    "type": "Markdown",
+    "data": {
+      "image": "jimbo-light.svg",
+      "imageDark": "jimbo-dark.svg",
+      "imageNoAnim": "jimbo-light-no-anim.svg",
+      "imageDarkNoAnim": "jimbo-dark-no-anim.svg",
+      "imageAlt": "Jimbo",
+      "imageLink": "https://github.com/JimboTheFrog/JimboTheFrog/tree/master/src",
+      "statsImage": "stats-light.svg",
+      "statsImageDark": "stats-dark.svg",
+      "statsImageNoAnim": "stats-light-no-anim.svg",
+      "statsImageDarkNoAnim": "stats-dark-no-anim.svg",
+      "statsImageAlt": "Profile Info and Stats"
+    }
+  }
+]

@@ -1,0 +1,101 @@
+# Define basic SVG attributes
+width: {{width}}
+height: {{height}}
+viewBox: 0 0 {{width}} {{height}}
+role: img
+preserveAspectRatio: xMinYMin none
+aria-labelledby: title
+aria-describedby: desc
+font-family: '{{{font}}}'
+font-size: {{fontSize}}
+
+Title: 
+  title:
+    title:  {{accessibleTitle}}
+    id: "title"
+
+Description: 
+  desc: 
+    desc: {{accessibleDesc}}
+    id: "desc"
+
+Stats Style:
+  style: |
+    @font-face {
+      font-family: 'JetBrains Mono';
+      font-style: normal;
+      font-weight: 100 800;
+      font-display: swap;
+      src: url('{{embed files.jetbrains}}') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    
+    {{#ifCond darkThemeClass '!=' 'dark'}}
+    .background {fill: #f6f8fa}
+    .keyColor {fill: #953800;}
+    .valueColor {fill: #0a3069;}
+    .addColor {fill: #1a7f37;}
+    .delColor {fill: #cf222e;}
+    .commentColor {fill: #8b949e;}
+    .line {stroke: black; stroke-width: 4px;}
+    text, tspan {
+      white-space: pre;
+      fill: black;
+    }
+    @media (prefers-color-scheme: dark) and not (prefers-color-scheme: no-preference) {
+      .background{fill: #161b22}
+      .keyColor {fill: #ffa657;}
+      .valueColor {fill: #a5d6ff;}
+      .addColor {fill: #3fb950;}
+      .delColor {fill: #f85149;}
+      .commentColor {fill: #8b949e;}
+      .line {stroke: white}
+      text, tspan {
+        fill: white;
+      }
+    }
+    {{else}}
+    .background{fill: #161b22}
+    .keyColor {fill: #ffa657;}
+    .valueColor {fill: #a5d6ff;}
+    .addColor {fill: #3fb950;}
+    .delColor {fill: #f85149;}
+    .commentColor {fill: #8b949e;}
+    .line {stroke: white}
+    text, tspan {
+      fill: white;
+    }
+    @media (prefers-color-scheme: light) and not (prefers-color-scheme: no-preference) {
+      .background {fill: #f6f8fa}
+      .keyColor {fill: #953800;}
+      .valueColor {fill: #0a3069;}
+      .addColor {fill: #1a7f37;}
+      .delColor {fill: #cf222e;}
+      .commentColor {fill: #8b949e;}
+      .line {stroke: black; stroke-width: 4px;}
+      text, tspan {
+        white-space: pre;
+        fill: black;
+      }
+    }
+    {{/ifCond}}
+
+Background:
+  rect:
+    rect: [ {{width}}, {{height}} ]
+    rx: 15
+    addClass: background
+
+Dividing Line:
+  line:
+    line: [10, 60, {{lineWidth}}, 60]
+    addClass: line
+
+
+Github Stats:
+  raw: |
+    <text x="10" y="40">
+      <tspan x="10" y="40">{{github.username}}'s Github Stats:</tspan>
+      <tspan class="keyColor" x="10" y="100">{{ keys.repos }}: </tspan>{{await (fetch_github_stats github.username 'repos')}} | <tspan class="keyColor">{{ keys.contributed }}</tspan>: {{await (fetch_github_stats github.username 'contributedRepos')}} | <tspan class="keyColor">{{ keys.commits }}</tspan>: {{await (fetch_github_stats github.username 'commits')}} | <tspan class="keyColor">{{ keys.stars }}</tspan><tspan>: {{await (fetch_github_stats github.username 'stars')}}</tspan>
+      <tspan class="keyColor" x="10" y="140">{{ keys.followers }}:</tspan> {{await (fetch_github_stats github.username 'followers')}} | <tspan class="keyColor">{{ keys.linesOfCode }}</tspan>: {{await (fetch_github_stats github.username 'linesOfCode')}} (<tspan class="addColor">{{await (fetch_github_stats github.username 'linesOfCodeAdded')}}++</tspan>, <tspan class="delColor">{{await (fetch_github_stats github.username 'linesOfCodeRemoved')}}--</tspan><tspan>)</tspan>
+    </text>
