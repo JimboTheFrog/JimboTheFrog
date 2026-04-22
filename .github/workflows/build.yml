@@ -2,7 +2,7 @@ name: 🔄 Update README
 
 on:
   push:
-    branches: ["master"]
+    branches: ["main"]
     paths:
       - 'src/**'
       - '.github/workflows/build.yml'
@@ -115,7 +115,7 @@ jobs:
       
   deployGithubPages:
 
-    uses: JimboTheFrog/JimboTheFrog/.github/workflows/deploy-github-pages.yml@master
+    uses: JimboTheFrog/JimboTheFrog/.github/workflows/deploy-github-pages.yml@main
     needs: update-readme
     permissions:
       contents: read
