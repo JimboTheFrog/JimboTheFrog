@@ -27,40 +27,37 @@ function cleanText(input: string): string {
 }
 
 class PlaywrightGitHubActionsReporter implements reporterTypes.Reporter {
-  onTestEnd(test: reporterTypes.TestCase, result: reporterTypes.TestResult): void {
+  async onTestEnd(test: reporterTypes.TestCase, result: reporterTypes.TestResult): Promise<void> {
     const testName = test.title;
     const status = result.status === 'passed' ? 'Success' : 'Failure';
     const browser = test.parent.project()!.name;
     const summaryTitle = `🎭 Integration - '${testName} ${browser}' - ${status} (Attempt #${result.retry + 1})`;
     const duration = `Duration: ${result.duration}ms`;
 
-    setTimeout(async () => {
-      if (await summary.previousSummaryPresent()) {
-        summary.addSeparator();
+    if (await summary.previousSummaryPresent()) {
+      summary.addSeparator();
+    }
+
+    if (result.status === 'failed') {
+      const error = cleanText(result.error!.message!);
+      summary.addHeading(summaryTitle, 4);
+      summary.addRaw(`${duration}`, true);
+      summary.addQuote(error!);
+      const attachments = result.attachments || [];
+      const snapshotFiles = attachments.filter((a: any) => a.name.toLowerCase().endsWith(".png"));
+      const actualImage = snapshotFiles.find(s => s.name.endsWith("-actual.png"));
+      const diffImage = snapshotFiles.find(s => s.name.endsWith("-diff.png"));
+
+      if (actualImage && diffImage) {
+        const imagesUrl = await uploadImages([actualImage.path!, diffImage.path!], path.dirname(actualImage.path!), browser, testName, result.retry)
+        summary.addLink("Screenshots", imagesUrl)
       }
+    } else {
+      summary.addHeading(summaryTitle, 4);
+      summary.addRaw(`${duration}`, true);
+    }
 
-      if (result.status === 'failed') {
-        const error = cleanText(result.error!.message!);
-        summary.addHeading(summaryTitle, 4);
-        summary.addRaw(`${duration}`, true);
-        summary.addQuote(error!);
-        const attachments = result.attachments || [];
-        const snapshotFiles = attachments.filter((a: any) => a.name.toLowerCase().endsWith(".png"));
-        const actualImage = snapshotFiles.find(s => s.name.endsWith("-actual.png"));
-        const diffImage = snapshotFiles.find(s => s.name.endsWith("-diff.png"));
-        //const expectedImage = snapshotFiles.find(s => s.name.endsWith("-expected.png"));
-
-        if (actualImage && diffImage) {
-          const imagesUrl = await uploadImages([actualImage.path!, diffImage.path!], path.dirname(actualImage.path!), browser, testName, result.retry)
-          summary.addLink("Screenshots", imagesUrl)
-        }
-      } else {
-        summary.addHeading(summaryTitle, 4);
-        summary.addRaw(`${duration}`, true);
-      }
-
-      await summary.write({ overwrite: false });
-    });
+    await summary.write({ overwrite: false });
   }
 }
 

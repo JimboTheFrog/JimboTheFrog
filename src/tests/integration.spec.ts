@@ -8,6 +8,15 @@ let serverInstances: { [key: number]: { server: http.Server, date: Date } } = {}
 
 const templates = get_default_templates();
 
+test.afterAll(async () => {
+  await Promise.all(
+    Object.values(serverInstances).map(({ server }) =>
+      new Promise<void>((resolve) => server.close(() => resolve()))
+    )
+  );
+  serverInstances = {};
+});
+
 test.beforeEach(async ({ page }) => {
   const info = test.info();
   const port = 8080 + info.parallelIndex;
