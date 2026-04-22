@@ -1,0 +1,184 @@
+# Eyes are large circles — the head (rendered in body.yaml) overlaps the lower
+# portion, making them appear to bulge upward from the top of the skull.
+
+Eye Left:
+  circle:
+    circle: 130
+    fill: '{{eye}}'
+    x: 68
+    y: 68
+
+Eye Right:
+  circle:
+    circle: 130
+    fill: '{{eye}}'
+    x: 408
+    y: 68
+
+Iris Style:
+  defs:
+    defs:
+    addDef: |
+      <radialGradient id="iris_gradient" cx="0.45" cy="0.4" r="0.55" fx="0.45" fy="0.4">
+        <stop offset="0%" stop-color="{{iris1}}" />
+        <stop offset="25%" stop-color="{{iris2}}" />
+        <stop offset="80%" stop-color="{{iris3}}" />
+        <stop offset="100%" stop-color="{{iris4}}" />
+      </radialGradient>
+  style: [
+    '.iris',
+    {
+      fill: url(#iris_gradient),
+      background: 'radial-gradient({{iris1}},{{iris2}},{{iris3}},{{iris4}})'
+    }
+  ]
+
+Iris Left:
+  circle:
+    circle: 95
+    x: 86
+    y: 85
+    addClass: iris
+
+Iris Right:
+  circle:
+    circle: 95
+    x: 426
+    y: 85
+    addClass: iris
+
+Pupil Animation:
+  style: |
+    @keyframes pupil-animation {
+      0%, 12%, 41%, 100% { transform: translate(0px, 0px); }
+      3%, 35%             { transform: translate(-3px, 1px); }
+      8%, 38%             { transform: translate(3px, -1px); }
+    }
+
+Pupil Style:
+  style: [
+    '.pupil',
+    {
+      animation: 'pupil-animation 19s alternate infinite',
+      fill: '{{pupil}}'
+    }
+  ]
+
+Pupil Left:
+  circle:
+    circle: 36
+    x: 115
+    y: 115
+    addClass: pupil
+
+Pupil Right:
+  circle:
+    circle: 36
+    x: 455
+    y: 115
+    addClass: pupil
+
+# ─── Nictitating membrane (transparent third eyelid) ─────────────────────────
+# Frogs have a nictitating membrane that sweeps from the nasal corner (inner
+# edge) across the eye. Uses clip-path to stay within the eye boundary.
+
+Nictitating Clip Left:
+  defs:
+    defs:
+    addDef: '<clipPath id="clip_left_eye"><circle cx="133" cy="133" r="65"/></clipPath>'
+
+Nictitating Clip Right:
+  defs:
+    defs:
+    addDef: '<clipPath id="clip_right_eye"><circle cx="473" cy="133" r="65"/></clipPath>'
+
+Nictitating Style:
+  style: |
+    .nic-left {
+      transform-box: fill-box;
+      transform-origin: right center;
+      transform: scaleX(0);
+      animation: nic-blink 13s 3s infinite linear both;
+    }
+    .nic-right {
+      transform-box: fill-box;
+      transform-origin: left center;
+      transform: scaleX(0);
+      animation: nic-blink 13s 3s infinite linear both;
+    }
+    @keyframes nic-blink {
+      0%,   7.7% { transform: scaleX(0); }
+      8.5%        { transform: scaleX(1); }
+      10%         { transform: scaleX(1); }
+      10.8%       { transform: scaleX(0); }
+      56.2%       { transform: scaleX(0); }
+      57%         { transform: scaleX(1); }
+      58.3%       { transform: scaleX(1); }
+      59.1%       { transform: scaleX(0); }
+      100%        { transform: scaleX(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .nic-left, .nic-right { animation: none !important; transform: scaleX(0); }
+    }
+
+Nictitating Left:
+  circle:
+    circle: 130
+    fill: 'rgba(240,255,230,0.62)'
+    x: 68
+    y: 68
+    addClass: nic-left
+    attr:
+      clip-path: "url(#clip_left_eye)"
+
+Nictitating Right:
+  circle:
+    circle: 130
+    fill: 'rgba(240,255,230,0.62)'
+    x: 408
+    y: 68
+    addClass: nic-right
+    attr:
+      clip-path: "url(#clip_right_eye)"
+
+Catchlight Left:
+  circle:
+    circle: 12
+    fill: 'rgba(255,255,255,0.90)'
+    x: 134
+    y: 120
+
+Catchlight Right:
+  circle:
+    circle: 12
+    fill: 'rgba(255,255,255,0.90)'
+    x: 474
+    y: 120
+
+Blush Left:
+  circle:
+    circle: 55
+    fill: 'rgba(255,115,95,0.26)'
+    x: 70
+    y: 278
+
+Blush Right:
+  circle:
+    circle: 55
+    fill: 'rgba(255,115,95,0.26)'
+    x: 483
+    y: 278
+
+Nostril Left:
+  circle:
+    circle: 13
+    fill: '{{skin3}}'
+    x: 252
+    y: 298
+
+Nostril Right:
+  circle:
+    circle: 13
+    fill: '{{skin3}}'
+    x: 341
+    y: 298

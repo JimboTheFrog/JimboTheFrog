@@ -1,0 +1,123 @@
+name: 🔄 Update README
+
+on:
+  push:
+    branches: ["master"]
+    paths:
+      - 'src/**'
+      - '.github/workflows/build.yml'
+  
+  schedule:
+    - cron: "0 5 * * 0"  # Runs every Sunday at midnight EST
+    - cron: "0 5 1 1 *"  # Jan 1
+    - cron: "0 5 2 1 *"  # Jan 2
+    - cron: "0 5 14 2 *" # Feb 14
+    - cron: "0 5 15 2 *" # Feb 15
+    - cron: "0 5 17 3 *" # Mar 17
+    - cron: "0 5 18 3 *" # Mar 18
+    - cron: "0 5 1 4 *"  # Apr 1
+    - cron: "0 5 2 4 *"  # Apr 2
+    - cron: "0 5 22 4 *" # Apr 22
+    - cron: "0 5 23 4 *" # Apr 23
+    - cron: "0 5 4 5 *"  # May 4
+    - cron: "0 5 5 5 *"  # May 5
+    - cron: "0 5 6 5 *"  # May 6
+    - cron: "0 5 31 10 *" # Oct 31
+    - cron: "0 5 1 11 *"  # Nov 1
+    - cron: "0 5 25 12 *" # Dec 25
+    - cron: "0 5 26 12 *" # Dec 26
+
+  workflow_dispatch:
+
+jobs:
+  read-playwright-version:
+      name: 'Read Playwright Version'
+      runs-on: ubuntu-latest
+      outputs:
+        playwright-version: ${{ steps.get_playwright_version.outputs.playwright-version }}
+      steps:
+        - uses: actions/checkout@v6
+        - run: |
+            playwright_version=$(node -e 'console.log(require("./src/package-lock.json")["packages"]["node_modules/@playwright/test"].version)')
+            echo "playwright-version=$playwright_version" >> $GITHUB_OUTPUT
+          id: get_playwright_version
+
+  update-readme:
+    name: "Build ReadMe and Commit"
+    runs-on: ubuntu-latest
+    needs: read-playwright-version
+    env:
+      HOME: /root
+    container:
+      image: mcr.microsoft.com/playwright:v${{ needs.read-playwright-version.outputs.playwright-version }}-noble
+      options: --user root
+    steps:
+      - name: Install git-lfs
+        run: |
+          apt-get update && apt-get install -y git-lfs
+          git-lfs install
+
+      - name: Checkout Repository
+        uses: actions/checkout@main
+        with:
+          lfs: true
+    
+      - name: Set up Node.js
+        uses: actions/setup-node@main
+        with:
+          node-version: '>=20'
+          cache: 'npm'
+          cache-dependency-path: "${{ github.workspace }}/src"
+          
+      - name: Install Node Dependencies
+        run: npm ci --prefix ./src
+          
+      - name: Increment version
+        run: npm version patch --prefix ./src
+
+      - name: Get Actions JWT
+        uses: actions/github-script@master
+        id: get_jwt
+        with:
+          script: |
+            core.setOutput('ACTIONS_RUNTIME_TOKEN', process.env['ACTIONS_RUNTIME_TOKEN']);
+            core.setOutput('ACTIONS_RESULTS_URL', process.env['ACTIONS_RESULTS_URL']);
+
+      - name: Test Project
+        env:
+          github: true
+          ACTIONS_RUNTIME_TOKEN: ${{ steps.get_jwt.outputs.ACTIONS_RUNTIME_TOKEN }}
+          ACTIONS_RESULTS_URL: ${{ steps.get_jwt.outputs.ACTIONS_RESULTS_URL }}
+        run: npm run test --prefix ./src
+
+      - name: Build Project
+        env:
+          PERSONAL_ACCESS_TOKEN: '${{ secrets.PERSONAL_ACCESS_TOKEN }}'
+        run: npm run build --prefix ./src
+
+      - name: Copy build output
+        run: cp src/out/*.* .
+
+      - name: Commit Changes
+        run: |
+          git config --global --add safe.directory $(pwd)
+          git status .
+          git config user.email "${{secrets.GIT_EMAIL}}"
+          git config user.name "${{secrets.GIT_NAME}}"
+          git add .
+          git commit -m "Update README" || echo "No changes to commit"
+          git push
+
+      - name: Upload GitGub Pages artifact
+        uses: actions/upload-pages-artifact@main
+        with:
+          path: src/dist
+      
+  deployGithubPages:
+
+    uses: JimboTheFrog/JimboTheFrog/.github/workflows/deploy-github-pages.yml@master
+    needs: update-readme
+    permissions:
+      contents: read
+      pages: write
+      id-token: write

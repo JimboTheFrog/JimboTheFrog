@@ -1,0 +1,99 @@
+#
+# This file defines the markup used to create the 'jimbo.svg' file. It uses
+# YAML instead of XML to define the structure of the SVG. How does this work?
+# First we parse this file using 'js-yaml', then use the resulting object to
+# invoke methods for 'SVG.js'. (See https://svgjs.dev/docs/3.0/ for more.)
+# We also use 'Handlebars' to populate variables at build time.
+#
+# This use of SVG+YAML allows for greater legibility and additional post-
+# processing techniques to improve the size of the final SVG. This approach is
+# entirely bespoke and while novel is likely to have unforseen pitfalls. That
+# said please feel free to give it a try if you're interested by downloading
+# the source code, navigating to the "src" directory and running:
+#   npm install
+#   npm run test
+#
+
+# Define basic SVG attributes
+width: {{width}}
+height: {{height}}
+viewBox: 0 0 {{width}} {{height}}
+role: img
+preserveAspectRatio: xMinYMin none
+aria-labelledby: title
+aria-describedby: desc
+
+Title:
+  title:
+    title: {{accessibleTitle}}
+    id: "title"
+
+Description:
+  desc:
+    desc: {{accessibleDesc}}
+    id: "desc"
+
+# Everything below here is imported from components defined in the `./jimbo` folder.
+Styles:
+  import: './jimbo/styles.svg.hbs.yaml'
+Background:
+  import: './jimbo/background.svg.hbs.yaml'
+Body:
+  import: './jimbo/body.svg.hbs.yaml'
+Face:
+  import: './jimbo/face.svg.hbs.yaml'
+Mouth:
+  import: './jimbo/mouth.svg.hbs.yaml'
+
+# Defines the conditional behavior for different holidays
+{{#ifCond (build_info "date-month") '==' "1/1"}}
+Speech Bubble:
+  import: './jimbo/speech-bubble.svg.hbs.yaml'
+Happy New Year:
+  import: './jimbo/messages/happy-new-year.svg.hbs.yaml'
+{{else ifCond (build_info "date-month") '==' "2/14"}}
+Speech Bubble:
+  import: './jimbo/speech-bubble.svg.hbs.yaml'
+Happy Valentines:
+  import: './jimbo/messages/happy-valentines.svg.hbs.yaml'
+{{else ifCond (build_info "date-month") '==' "3/17"}}
+Speech Bubble:
+  import: './jimbo/speech-bubble.svg.hbs.yaml'
+Saint Patricks:
+  import: './jimbo/messages/saint-patricks.svg.hbs.yaml'
+{{else ifCond (build_info "date-month") '==' "4/1"}}
+Speech Bubble:
+  import: './jimbo/speech-bubble.svg.hbs.yaml'
+April Fools:
+  import: './jimbo/messages/april-fools.svg.hbs.yaml'
+{{else ifCond (build_info "date-month") '==' "4/22"}}
+Speech Bubble:
+  import: './jimbo/speech-bubble.svg.hbs.yaml'
+Earth Day:
+  import: './jimbo/messages/earth-day.svg.hbs.yaml'
+{{else ifCond (build_info "date-month") '==' "5/4"}}
+Speech Bubble:
+  import: './jimbo/speech-bubble.svg.hbs.yaml'
+Star Wars:
+  import: './jimbo/messages/star-wars.svg.hbs.yaml'
+{{else ifCond (build_info "date-month") '==' "5/5"}}
+Speech Bubble:
+  import: './jimbo/speech-bubble.svg.hbs.yaml'
+Cinco De Mayo:
+  import: './jimbo/messages/cinco-de-mayo.svg.hbs.yaml'
+{{else ifCond (build_info "date-month") '==' "10/31"}}
+Speech Bubble:
+  import: './jimbo/speech-bubble.svg.hbs.yaml'
+Happy Halloween:
+  import: './jimbo/messages/happy-halloween.svg.hbs.yaml'
+{{else ifCond (build_info "date-month") '==' "12/25"}}
+Speech Bubble:
+  import: './jimbo/speech-bubble.svg.hbs.yaml'
+Merry Christmas:
+  import: './jimbo/messages/merry-christmas.svg.hbs.yaml'
+{{else}}
+Speech Bubble:
+  import: './jimbo/speech-bubble.svg.hbs.yaml'
+Hello World:
+  import: './jimbo/messages/hello-world.svg.hbs.yaml'
+{{/ifCond}}
