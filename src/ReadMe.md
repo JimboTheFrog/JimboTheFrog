@@ -1,17 +1,19 @@
-<h1 align="center"><strong><em>Dylan Langston's Github profile</em> 🙋‍♂️</strong></h1>
+<h1 align="center"><strong><em>Jimbo The Frog's Github profile</em> 🐸</strong></h1>
 <p align="center">
-    <picture width="100%" alt="Dylan Langston's Github profile 🙋‍♂️" align="center">
-      <source media="(prefers-color-scheme: dark)" srcset="../dylan-dark.svg">
-      <img src="../dylan-light.svg" alt="Dylan Langston's Github profile 🙋‍♂️">
+    <picture width="100%" align="center">
+      <source media="(prefers-color-scheme: dark)" srcset="../jimbo-dark.svg">
+      <img src="../jimbo-light.svg" alt="Jimbo The Frog's Github profile 🐸">
     </picture>
 </p>
 
 <p align="center">
   <a href="https://www.typescriptlang.org/"><img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff&style=flat-square"></a>
-  <a href="https://github.com/dylanlangston/dylanlangston/actions/workflows/build.yml"><img alt="GitHub Workflow CI/CD" src="https://img.shields.io/github/actions/workflow/status/dylanlangston/dylanlangston/build.yml?label=CI%2FCD&style=flat-square"></a>
-  <a href="https://github.com/dylanlangston/dylanlangston/blob/master/LICENSE"><img alt="GitHub License" src="https://img.shields.io/github/license/dylanlangston/dylanlangston?style=flat-square&label=License"></a>
-  <a href="https://api.github.com/repos/dylanlangston/dylanlangston"><img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/dylanlangston/dylanlangston?label=Repo%20Size&style=flat-square"></a>
+  <a href="https://github.com/JimboTheFrog/JimboTheFrog/actions/workflows/build.yml"><img alt="GitHub Workflow CI/CD" src="https://img.shields.io/github/actions/workflow/status/JimboTheFrog/JimboTheFrog/build.yml?label=CI%2FCD&style=flat-square"></a>
+  <a href="https://github.com/JimboTheFrog/JimboTheFrog/blob/master/LICENSE"><img alt="GitHub License" src="https://img.shields.io/github/license/JimboTheFrog/JimboTheFrog?style=flat-square&label=License"></a>
+  <a href="https://api.github.com/repos/JimboTheFrog/JimboTheFrog"><img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/JimboTheFrog/JimboTheFrog?label=Repo%20Size&style=flat-square"></a>
 </p>
+
+> 🐸 Forked from [dylanlangston/dylanlangston](https://github.com/dylanlangston/dylanlangston) — the original build system, lovingly repurposed for a frog.
 
 ### A brief introduction 🎤
 Hello and welcome! This repository contains the source code used to generate my Github profile readme. The core of this solution lies in using the combination of YAML and Handlebars as templates. The [`./build.ts`](./build.ts) file orchestrates the build process, utilizing [`./library/Builder.ts`](./library/Builder.ts) to generate assets based on templates like [`./templates/dylan.svg.hbs.yaml`](./templates/dylan.svg.hbs.yaml) and [`./templates/readme.md.hbs`](./templates/readme.md.hbs) defined in [`./build-config.json`](./build-config.json). These templates are processed using Handlebars, allowing for population of variables also defined in `./build-config.json`. The novel approach of SVG with YAML markup enhances readability and enables post-processing techniques to optimize the final SVG output.
@@ -25,11 +27,11 @@ Hello and welcome! This repository contains the source code used to generate my 
 __Getting the Source Code__
 1. Clone the repository: 
     ```
-    git clone https://github.com/dylanlangston/dylanlangston.git
+    git clone https://github.com/JimboTheFrog/JimboTheFrog.git
     ```
 2. Navigate to the project's source directory:
     ```
-    cd dylanlangston/src
+    cd JimboTheFrog/src
     ```
 
     </td>
@@ -96,17 +98,17 @@ __Preview__
   <tr>
     <td colspan="2">
       <p align="center">
-        <a href="https://codespaces.new/dylanlangston/dylanlangston"><img src="https://img.shields.io/static/v1?style=for-the-badge&label=&message=Open+GitHub+Codespaces&color=lightgrey&logo=github" alt="Open in GitHub Codespaces"></a>
+        <a href="https://codespaces.new/JimboTheFrog/JimboTheFrog"><img src="https://img.shields.io/static/v1?style=for-the-badge&label=&message=Open+GitHub+Codespaces&color=lightgrey&logo=github" alt="Open in GitHub Codespaces"></a>
       </p>
     </td>
     <td colspan="2">
       <p align="center">
-        <a href="https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/dylanlangston/dylanlangston"><img src="https://img.shields.io/static/v1?style=for-the-badge&label=&message=Open+Dev+Container&color=blue&logo=visualstudiocode" alt="Open Dev Container"></a>
+        <a href="https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/JimboTheFrog/JimboTheFrog"><img src="https://img.shields.io/static/v1?style=for-the-badge&label=&message=Open+Dev+Container&color=blue&logo=visualstudiocode" alt="Open Dev Container"></a>
       </p>
     </td>
     <td colspan="2">
       <p align="center">
-        <a href="https://devpod.sh/open#https://github.com/dylanlangston/dylanlangston"><img src="https://img.shields.io/static/v1?style=for-the-badge&label=&message=Open+DevPod&color=9933CC&logo=devdotto" alt="Open DevPod"></a>
+        <a href="https://devpod.sh/open#https://github.com/JimboTheFrog/JimboTheFrog"><img src="https://img.shields.io/static/v1?style=for-the-badge&label=&message=Open+DevPod&color=9933CC&logo=devdotto" alt="Open DevPod"></a>
       </p>
     </td>
   </tr>
@@ -118,12 +120,12 @@ __Preview__
   <tr>
     <td colspan="3">
       <p align="center">
-        <a href="https://github.dev/dylanlangston/dylanlangston"><img src="https://img.shields.io/static/v1?style=for-the-badge&label=&message=View+on+GitHub.dev&color=lightgrey&logo=github" alt="Edit on GitHub.dev"></a>
+        <a href="https://github.dev/JimboTheFrog/JimboTheFrog"><img src="https://img.shields.io/static/v1?style=for-the-badge&label=&message=View+on+GitHub.dev&color=lightgrey&logo=github" alt="Edit on GitHub.dev"></a>
       </p>
     </td>
     <td colspan="3">
       <p align="center">
-        <a href="https://vscode.dev/github/dylanlangston/dylanlangston"><img src="https://img.shields.io/static/v1?style=for-the-badge&label=&message=View+on+VSCode.dev&color=blue&logo=visualstudiocode" alt="Open in vscode.dev"></a>
+        <a href="https://vscode.dev/github/JimboTheFrog/JimboTheFrog"><img src="https://img.shields.io/static/v1?style=for-the-badge&label=&message=View+on+VSCode.dev&color=blue&logo=visualstudiocode" alt="Open in vscode.dev"></a>
       </p>
     </td>
   </tr>
@@ -221,24 +223,15 @@ graph LR;
 ```
 
 ### Citations 📓
-In this project, we utilize images under fair use to create derivative artwork. These images are sourced from publicly available resources and are used for the purpose of creating transformative artworks.
+In this project, we utilize images sourced from publicly available resources.
 <table>
   <tr>
-    <td><img src="./static/bliss.webp" alt="Bliss (Windows XP)" width="200em"></td>
+    <td><img src="./static/swamp.webp" alt="Swamp / Bayou, Louisiana" width="200em"></td>
     <td>
-      <p><em>Bliss (Windows XP)</em></p>
-      <p>Original scan of Charles O'Rear's photograph</p>
-      <p>Source: <a href="https://en.wikipedia.org/wiki/File:Bliss_(Windows_XP).png">Wikipedia</a></p>
-      <p>License: Used with permission from Microsoft</p>
-    </td>
-  </tr>
-  <tr>
-    <td><img src="./static/solo.webp" alt="Solo Jazz design" width="200em"></td>
-    <td>
-      <p><em>Solo Jazz design</em></p>
-      <p>The Solo Jazz design by Gina Ekiss represented in a high-quality clean image.</p>
-      <p>Source: <a href="https://en.wikipedia.org/wiki/File:Solo_Jazz_design.jpg">Wikipedia</a></p>
-      <p>License: Solo Cup Company/Dart Container</p>
+      <p><em>Swamp / Bayou, Louisiana</em></p>
+      <p>Photo by skeeze</p>
+      <p>Source: <a href="https://pixabay.com/photos/swamp-bayou-louisiana-moss-cypress-169168/">Pixabay</a></p>
+      <p>License: Pixabay Content License (free for commercial use, no attribution required — but credit given anyway because I'm a frog with integrity)</p>
     </td>
   </tr>
   <tr>
@@ -381,7 +374,7 @@ Here are some additional resources which are used:
 </table>
 
 ### License 📜
-This repository is licensed under the [MIT License](https://opensource.org/licenses/MIT). See the [`LICENSE`](https://github.com/dylanlangston/dylanlangston/blob/main/LICENSE) file for details.
+This repository is licensed under the [MIT License](https://opensource.org/licenses/MIT). See the [`LICENSE`](https://github.com/JimboTheFrog/JimboTheFrog/blob/main/LICENSE) file for details.
 
 <h2 id="footer"></h2>
 <sub>
