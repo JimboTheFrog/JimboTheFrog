@@ -170,7 +170,6 @@ class Summary {
         const attrs = {
             ...(lang && { lang })
         }
-        this.#wrap
         const element = this.#wrap('pre', this.#wrap('code', code), attrs)
         return this.addRaw(element).addEOL()
     }

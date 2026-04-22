@@ -23,7 +23,7 @@ Hello World Style:
         transform: rotate(-5deg);
       }
     }
-    @media (prefers-reduced-motion) {
+    @media (prefers-reduced-motion: reduce) {
       .hello-world {
         animation: none !important;
       }

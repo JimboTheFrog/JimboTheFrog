@@ -22,7 +22,7 @@ export async function compileAsync<T>(template: T) {
                 const id = promises.push(promise);
                 return `\{\{await ${id - 1}\}\}`
             }
-            else throw "Not a promise: " + JSON.stringify(promise);
+            else throw new Error("Not a promise: " + JSON.stringify(promise));
         });
 
         const compiledTemplate = hb(context);
@@ -79,7 +79,7 @@ export function register(buildVersion: string, buildTime: Date, debug: boolean) 
             case "date-month":
                 return (buildTime.getMonth() + 1) + '/' + buildTime.getDate();
             default:
-                throw "Not Implemented";
+                throw new Error("Not Implemented");
         }
     });
 
@@ -94,7 +94,7 @@ export function register(buildVersion: string, buildTime: Date, debug: boolean) 
         const accessToken = process.env.PERSONAL_ACCESS_TOKEN ?? process.env.GITHUB_TOKEN;
         if (debug || !accessToken) {
             githubStatsMap[username] = new Promise((resolve) => resolve({
-                username: this.userName,
+                username: username,
                 repos: 0,
                 contributedRepos: 0,
                 commits: 0,

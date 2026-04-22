@@ -114,7 +114,7 @@ jobs:
           path: src/dist
       
   deployGithubPages:
-    if: ${{ success() || needs.Build.result == 'success' }}
+
     uses: JimboTheFrog/JimboTheFrog/.github/workflows/deploy-github-pages.yml@master
     needs: update-readme
     permissions:

@@ -35,7 +35,7 @@ April Fools Style:
       50% { fill: hotpink; }
       100% { fill: limegreen; }
     }
-    @media (prefers-reduced-motion) {
+    @media (prefers-reduced-motion: reduce) {
       .april-fools { animation: none !important; }
     }
 

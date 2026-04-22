@@ -19,7 +19,7 @@ Cinco De Mayo Style:
       0% { transform: rotate(3deg); }
       100% { transform: rotate(-3deg); }
     }
-    @media (prefers-reduced-motion) {
+    @media (prefers-reduced-motion: reduce) {
       .cinco-de-mayo { animation: none !important; }
     }
 

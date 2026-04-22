@@ -19,7 +19,7 @@ Earth Day Style:
       0% { transform: rotate(2deg); }
       100% { transform: rotate(-2deg); }
     }
-    @media (prefers-reduced-motion) {
+    @media (prefers-reduced-motion: reduce) {
       .earth-day { animation: none !important; }
     }
 

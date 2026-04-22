@@ -38,7 +38,7 @@
   {
     "in": "jimbo-light.svg",
     "out": "jimbo-dark.svg",
-    "type": "DarkSVGVarient"
+    "type": "DarkSVGVariant"
   },
   {
     "in": "jimbo-light.svg",
@@ -81,7 +81,7 @@
   {
     "in": "stats-light.svg",
     "out": "stats-dark.svg",
-    "type": "DarkSVGVarient"
+    "type": "DarkSVGVariant"
   },
   {
     "in": "readme.md.hbs",

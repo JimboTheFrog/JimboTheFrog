@@ -89,7 +89,7 @@ export class Builder {
     }
 
     private async _processTemplate(template: Template): Promise<void> {
-        if (template.type == TemplateType.DarkSVGVarient) {
+        if (template.type == TemplateType.DarkSVGVariant) {
             await this._processDarkVariant(template);
             return;
         }
@@ -197,7 +197,7 @@ export class Builder {
     private async _validate(type: TemplateType, input: string): Promise<boolean> {
         switch (type) {
             case TemplateType.SVG:
-            case TemplateType.DarkSVGVarient:
+            case TemplateType.DarkSVGVariant:
             case TemplateType.AnimationDisabledSVG:
             case TemplateType.DarkAnimationDisabledSVG:
                 return SVG.Instance.validate(input)
@@ -211,7 +211,7 @@ export class Builder {
     private async _minify(type: TemplateType, input: string): Promise<string> {
         switch (type) {
             case TemplateType.SVG:
-            case TemplateType.DarkSVGVarient:
+            case TemplateType.DarkSVGVariant:
             case TemplateType.AnimationDisabledSVG:
             case TemplateType.DarkAnimationDisabledSVG:
                 return await SVG.Instance.minify(input, this._disableAnimation, this._debug, this._console)

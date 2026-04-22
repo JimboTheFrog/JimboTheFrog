@@ -19,7 +19,7 @@ Happy New Year Style:
       0% { transform: rotate(5deg); }
       100% { transform: rotate(-5deg); }
     }
-    @media (prefers-reduced-motion) {
+    @media (prefers-reduced-motion: reduce) {
       .happy-new-year { animation: none !important; }
     }
 

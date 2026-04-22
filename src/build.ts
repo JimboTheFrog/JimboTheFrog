@@ -6,7 +6,7 @@ console.log(`Starting build 🏇`);
 // Using the new builder pattern with fluent API
 Builder.withDefaults()
     .withVersion(packageJson.version)
-    .withDateTime(new Date(process.env.BUILD_TIME ?? new Date()))
+    .withDateTime(process.env.BUILD_TIME ? new Date(process.env.BUILD_TIME) : new Date())
     .build()
     .then(() => {
         console.log(`Build Successful ✨`);

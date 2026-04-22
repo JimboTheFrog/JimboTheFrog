@@ -14,10 +14,10 @@ test.beforeEach(async ({ page }) => {
 
   let date: Date = new Date("01/02/2024");
   if (info.tags[0]) {
-    date = new Date(info.tags[0].substring(1, info.tags[0].length).replace('/', '-'));
+    date = new Date(info.tags[0].substring(1, info.tags[0].length).replaceAll('/', '-'));
   }
 
-  if (serverInstances[info.parallelIndex]?.date != date) {
+  if (serverInstances[info.parallelIndex]?.date?.getTime() !== date.getTime()) {
     const buildResult = await Builder.create()
       .withTemplates(templates)
       .withVersion('1.0.0')
@@ -76,7 +76,7 @@ test('Ensure layout is correct', async ({ page }) => {
     maxDiffPixelRatio: 0.1,
   });
 
-  page.emulateMedia({
+  await page.emulateMedia({
     colorScheme: 'dark'
   });
 

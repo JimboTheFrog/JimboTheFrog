@@ -23,7 +23,7 @@ Merry Christmas Style:
         transform: rotate(-5deg);
       }
     }
-    @media (prefers-reduced-motion) {
+    @media (prefers-reduced-motion: reduce) {
       .merry-christmas {
         animation: none !important;
       }

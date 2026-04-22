@@ -38,7 +38,7 @@ export async function generateWebPreview(requestedFile: string, templates: Templ
                         </body>
                     </html>
                     `);
-                case "DarkSVGVarient":
+                case "DarkSVGVariant":
                 case "AnimationDisabledSVG":
                 case "DarkAnimationDisabledSVG":
                 case "SVG":
@@ -64,8 +64,8 @@ export function getServer(port: number, templates: Template[], outputFolder: str
                     res.end(preview.content);
                 })
                 .catch((err) => {
-                    res.writeHead(404, err);
-                    res.end();
+                    res.writeHead(404, { 'Content-Type': 'text/plain' });
+                    res.end(String(err));
                 });
             return;
         }

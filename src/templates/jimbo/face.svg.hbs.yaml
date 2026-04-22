@@ -117,7 +117,7 @@ Nictitating Style:
       59.1%       { transform: scaleX(0); }
       100%        { transform: scaleX(0); }
     }
-    @media (prefers-reduced-motion) {
+    @media (prefers-reduced-motion: reduce) {
       .nic-left, .nic-right { animation: none !important; transform: scaleX(0); }
     }
 

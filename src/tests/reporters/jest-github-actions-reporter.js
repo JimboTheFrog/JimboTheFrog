@@ -23,7 +23,7 @@ class JestGitHubActionsReporter {
       });
     });
 
-    summary.write({ overwrite: false });
+    await summary.write({ overwrite: false });
   }
 }
 

@@ -1,7 +1,7 @@
 export enum TemplateType {
     SVG = "SVG",
     Markdown = "Markdown",
-    DarkSVGVarient = "DarkSVGVarient",
+    DarkSVGVariant = "DarkSVGVariant",
     AnimationDisabledSVG = "AnimationDisabledSVG",
     DarkAnimationDisabledSVG = "DarkAnimationDisabledSVG",
 }
@@ -22,12 +22,12 @@ export type MarkdownTemplate = {
     data: any;
 }
 
-export type DarkSVGVarient = {
+export type DarkSVGVariant = {
     in: string;
     out: string | null;
 }
 
-export class Template implements SVGTemplate, MarkdownTemplate, DarkSVGVarient {
+export class Template implements SVGTemplate, MarkdownTemplate, DarkSVGVariant {
     in: string;
     out: string | null;
     data: any | {

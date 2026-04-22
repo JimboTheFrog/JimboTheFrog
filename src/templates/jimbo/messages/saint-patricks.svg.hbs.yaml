@@ -23,7 +23,7 @@ Happy St Patricks Style:
         transform: rotate(-3deg);
       }
     }
-    @media (prefers-reduced-motion) {
+    @media (prefers-reduced-motion: reduce) {
       .happy-st-patricks {
         animation: none !important;
       }

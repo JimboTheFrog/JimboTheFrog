@@ -7,7 +7,7 @@ Fadein Style:
     @keyframes fade-in {
       0% {
         opacity: 0.00;
-      },
+      }
       50% {
         opacity: 0.01;
       }

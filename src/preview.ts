@@ -20,7 +20,7 @@ async function startServer(watch: boolean, port: number) {
             const result = await Builder.create()
                 .withTemplates(default_templates)
                 .withVersion(packageJson.version)
-                .withDateTime(new Date(process.env.BUILD_TIME ?? new Date()))
+                .withDateTime(process.env.BUILD_TIME ? new Date(process.env.BUILD_TIME) : new Date())
                 .withOutputFolder(outputDir)
                 .withConsole(new NullLogger())
                 .build();
@@ -87,10 +87,10 @@ async function startServer(watch: boolean, port: number) {
         }, 500);
     };
     fs.watch(path.resolve(cwd, 'build-config.json'), watcher);
-    watchDirectoriesRecusively(path.resolve(cwd, 'templates'), watcher);
+    watchDirectoriesRecursively(path.resolve(cwd, 'templates'), watcher);
 }
 
-const watchDirectoriesRecusively = (dirPath: string, innerWatcher: fs.WatchListener<string>): void => {
+const watchDirectoriesRecursively = (dirPath: string, innerWatcher: fs.WatchListener<string>): void => {
     const watcher: fs.WatchListener<string> = (eventType, filename) => {
         if (filename) {
             innerWatcher(eventType, filename);
@@ -99,7 +99,7 @@ const watchDirectoriesRecusively = (dirPath: string, innerWatcher: fs.WatchListe
                 const filePath: string = path.join(dirPath, filename.toString());
                 fs.stat(filePath, (err: NodeJS.ErrnoException | null, stats: fs.Stats) => {
                     if (!err && stats.isDirectory()) {
-                        watchDirectoriesRecusively(filePath, innerWatcher);
+                        watchDirectoriesRecursively(filePath, innerWatcher);
                     }
                 });
             }
@@ -122,7 +122,7 @@ const watchDirectoriesRecusively = (dirPath: string, innerWatcher: fs.WatchListe
                 }
 
                 if (stats.isDirectory()) {
-                    watchDirectoriesRecusively(filePath, innerWatcher);
+                    watchDirectoriesRecursively(filePath, innerWatcher);
                 }
             });
         });

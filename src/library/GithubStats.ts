@@ -77,7 +77,7 @@ export class GitHubStatsFetcher {
             `;
             const variables = { login: this.userName, ownerAffiliations, first: 100, after: endCursor };
             const response = await this.makeRequest(query, variables);
-            totalCount += response.user.repositories.totalCount;
+            totalCount += response.user.repositories.nodes.length;
             hasNextPage = response.user.repositories.pageInfo.hasNextPage;
             endCursor = response.user.repositories.pageInfo.endCursor;
         }
@@ -113,7 +113,7 @@ export class GitHubStatsFetcher {
             `;
             const variables = { login: this.userName, first: 100, after: endCursor };
             const response = await this.makeRequest(query, variables);
-            totalCount += response.user.contributionsCollection.repositoryContributions.totalCount;
+            totalCount += response.user.contributionsCollection.repositoryContributions.nodes.length;
             hasNextPage = response.user.contributionsCollection.repositoryContributions.pageInfo.hasNextPage;
             endCursor = response.user.contributionsCollection.repositoryContributions.pageInfo.endCursor;
         }
@@ -196,7 +196,7 @@ export class GitHubStatsFetcher {
             `;
             const variables = { login: this.userName, first: 100, after: endCursor };
             const response = await this.makeRequest(query, variables);
-            totalCount += response.user.followers.totalCount;
+            totalCount += response.user.followers.nodes.length;
             hasNextPage = response.user.followers.pageInfo.hasNextPage;
             endCursor = response.user.followers.pageInfo.endCursor;
         }
