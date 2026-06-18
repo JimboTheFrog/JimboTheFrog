@@ -49,6 +49,39 @@ const cssNanoPreset = cssnano({
     ]
 });
 
+// Local replacement for opentype.js' Path.toPathData(): their roundDecimal()
+// concatenates `decimalPart + "e+N"` as a string for rounding, which produces
+// NaN whenever the decimal part is small enough that JS stringifies it in
+// scientific notation (e.g. 9.99e-11) — corrupting the SVG path string for
+// certain font/text combinations. Serialize from path.commands directly.
+function commandsToPathData(commands: opentype.PathCommand[], decimalPlaces: number): string {
+    const fmt = (v: number) => {
+        const factor = 10 ** decimalPlaces;
+        const rounded = Math.round(v * factor) / factor;
+        return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(decimalPlaces);
+    };
+    const pack = (...values: number[]) => {
+        let s = '';
+        for (let i = 0; i < values.length; i++) {
+            const str = fmt(values[i]);
+            if (i > 0 && !str.startsWith('-')) s += ' ';
+            s += str;
+        }
+        return s;
+    };
+    let d = '';
+    for (const cmd of commands) {
+        switch (cmd.type) {
+            case 'M': d += 'M' + pack(cmd.x, cmd.y); break;
+            case 'L': d += 'L' + pack(cmd.x, cmd.y); break;
+            case 'C': d += 'C' + pack(cmd.x1, cmd.y1, cmd.x2, cmd.y2, cmd.x, cmd.y); break;
+            case 'Q': d += 'Q' + pack(cmd.x1, cmd.y1, cmd.x, cmd.y); break;
+            case 'Z': d += 'Z'; break;
+        }
+    }
+    return d;
+}
+
 export class SVG {
     public static Instance = new SVG();
 
@@ -219,9 +252,8 @@ export class SVG {
             const file = await readFile(fontPath);
             font = opentype.parse(file.buffer);
         }
-        // const font = await opentype.load(fontPath)
         const path = font.getPath(text, x, y, fontSize);
-        return path.toPathData(2);
+        return commandsToPathData(path.commands, 2);
     }
 
     async generateSVGFromConfig(config: any, data: any, buildVersion: string, buildTime: Date, outputFolder: string, debug: boolean, con?: typeof console): Promise<string> {
